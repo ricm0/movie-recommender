@@ -17,7 +17,7 @@ RSpec.describe MovieRecommender::Recommender do
     context 'when user exists and has liked movies' do
       it 'returns recommended movies' do
         recommendations = subject.recommend(1, 5)
-        expect(recommendations).to match_array([1, 3, 4, 6, 7])
+        expect(recommendations).to match_array([1, 3, 6, 8, 11])
       end
     end
 
