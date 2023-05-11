@@ -1,9 +1,17 @@
 require_relative '../../lib/movie_recommender/movie'
 
 RSpec.describe MovieRecommender::Movie do
-  it 'has an id and a title' do
-    movie = MovieRecommender::Movie.new(1, 'Toy Story (1995)')
-    expect(movie.id).to eq(1)
-    expect(movie.title).to eq('Toy Story (1995)')
+  let(:movie_data) { { 'id' => 1, 'title' => 'Toy Story (1995)' } }
+
+  subject { described_class.new(id: movie_data['id'], title: movie_data['title']) }
+
+  describe '#initialize' do
+    it 'sets the id' do
+      expect(subject.id).to eq(movie_data['id'])
+    end
+
+    it 'sets the title' do
+      expect(subject.title).to eq(movie_data['title'])
+    end
   end
 end
