@@ -11,7 +11,9 @@ namespace :recommend do
     num_recommendations = args.num_recommendations.to_i
 
     data = JSON.parse(File.read('data/movies.json'))
-    movies = data['movies'].map { |id, title| MovieRecommender::Movie.new(id: id.to_i, title: title) }
+    movies = data['movies'].each_with_object({}) do |(id, title), movies_hash|
+      movies_hash[id.to_i] = MovieRecommender::Movie.new(id: id.to_i, title: title)
+    end
     users = data['users'].map do |user_data|
       MovieRecommender::User.new(id: user_data['user_id'], liked_movies: user_data['movies'])
     end
