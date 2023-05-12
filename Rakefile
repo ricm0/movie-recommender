@@ -16,10 +16,8 @@ namespace :recommend do
       MovieRecommender::User.new(id: user_data['user_id'], liked_movies: user_data['movies'])
     end
 
-    recommender = MovieRecommender::Recommender.new(users)
-    recommendations = recommender.recommend(user_id, num_recommendations)
-
-    recommended_movies = recommendations.map { |id| movies.find { |movie| movie.id == id } }
+    recommender = MovieRecommender::Recommender.new(movies, users)
+    recommended_movies = recommender.recommend(user_id, num_recommendations)
 
     puts "Recommendations for User #{user_id}:"
     recommended_movies.each { |movie| puts movie.title }
